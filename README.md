@@ -6,6 +6,7 @@ a wercker step to push to cloud foundry
 
 SAMPLE USAGE:
 
+```
 deploy:
   steps:
     - xchapter7x/cf-push:
@@ -16,12 +17,13 @@ deploy:
         cloudfoundry_api_url: $cfurl
         cloudfoundry_app_name: $cfappname
         cloudfoundry_use_manifest: true
-        
-        
+```
 
 
 SUPPORTED ARGUMENTS:
 (supports all arguments to 'cf push' CLI)
+
+```
 properties:
   cloudfoundry_user_name:
     type: string
@@ -88,3 +90,4 @@ properties:
     type: boolean
     required: false
     default: false
+```
