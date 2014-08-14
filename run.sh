@@ -1,22 +1,23 @@
-ruby -v
 wget http://go-cli.s3-website-us-east-1.amazonaws.com/releases/v6.3.2/cf-linux-amd64.tgz
 tar -zxvf cf-linux-amd64.tgz
-./cf api ${WERCKER_CF_PUSH_CLOUDFOUNDRY_API_URL}
+CF=./cf
+
+${CF} api ${WERCKER_CF_PUSH_CLOUDFOUNDRY_API_URL}
 
 appname=${WERCKER_CF_PUSH_CLOUDFOUNDRY_APP_NAME}
 username=${WERCKER_CF_PUSH_CLOUDFOUNDRY_USER_NAME}
 password=${WERCKER_CF_PUSH_CLOUDFOUNDRY_USER_PASS}
 organization=${WERCKER_CF_PUSH_CLOUDFOUNDRY_USER_PASS}
 space=${WERCKER_CF_PUSH_CLOUDFOUNDRY_USER_PASS}
-./cf login -u $username -p $password -o $organization -s $space
+${CF} login -u $username -p $password -o $organization -s $space
 
 PUSH_CMD=""
 
 if [ ${WERCKER_CF_PUSH_CLOUDFOUNDRY_USE_MANIFEST} == true ]; then
-  PUSH_CMD="./cf push ${appname}"
+  PUSH_CMD="${CF} push ${appname}"
 
 else
-  PUSH_CMD="./cf push ${appname}"
+  PUSH_CMD="${CF} push ${appname}"
 
   if [ ${WERCKER_CF_PUSH_CLOUDFOUNDRY_BUILDPACK} != "" ]; then
     PUSH_CMD="${PUSH_CMD} -b ${WERCKER_CF_PUSH_CLOUDFOUNDRY_BUILDPACK}"
