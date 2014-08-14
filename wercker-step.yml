@@ -1,5 +1,5 @@
 name: cf-push
-version: 0.0.1
+version: 0.0.2
 description: cf-push step
 properties:
   cloudfoundry_user_name:
