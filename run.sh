@@ -82,19 +82,19 @@ if [ -n ${WERCKER_CF_PUSH_CLOUDFOUNDRY_STACK} ]; then
 fi
 
 if [ -n ${WERCKER_CF_PUSH_CLOUDFOUNDRY_NO_HOSTNAME} ]; then
-  if [[ ${WERCKER_CF_PUSH_CLOUDFOUNDRY_NO_HOSTNAME} == true ]]; then
+  if [ ${WERCKER_CF_PUSH_CLOUDFOUNDRY_NO_HOSTNAME} == true ]; then
     PUSH_CMD="${PUSH_CMD} --no-hostname"
   fi
 fi
 
 if [ -n ${WERCKER_CF_PUSH_CLOUDFOUNDRY_NO_ROUTE} ]; then
-  if [[ ${WERCKER_CF_PUSH_CLOUDFOUNDRY_NO_ROUTE} == true]]; then
+  if [ ${WERCKER_CF_PUSH_CLOUDFOUNDRY_NO_ROUTE} == true ]; then
     PUSH_CMD="${PUSH_CMD} --no-route"
   fi
 fi
 
 if [ -n ${WERCKER_CF_PUSH_CLOUDFOUNDRY_NO_START} ]; then
-  if [[ ${WERCKER_CF_PUSH_CLOUDFOUNDRY_NO_START} == true ]]; then
+  if [ ${WERCKER_CF_PUSH_CLOUDFOUNDRY_NO_START} == true ]; then
     PUSH_CMD="${PUSH_CMD} --no-start"
   fi
 fi
