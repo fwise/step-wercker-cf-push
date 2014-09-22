@@ -1,6 +1,4 @@
 #!/bin/sh
-set -e
-
 if [ ! -n "$WERCKER_CF_PUSH_CLOUDFOUNDRY_API_URL" ]
 then
     fail 'missing or empty option cloudfoundry_api_url, please check wercker.yml'
@@ -39,7 +37,10 @@ fi
 wget http://go-cli.s3-website-us-east-1.amazonaws.com/releases/v6.3.2/cf-linux-amd64.tgz
 tar -zxvf cf-linux-amd64.tgz
 CF=./cf
+echo "${CF} api ${WERCKER_CF_PUSH_CLOUDFOUNDRY_API_URL}"
 ${CF} api ${WERCKER_CF_PUSH_CLOUDFOUNDRY_API_URL}
+
+echo "${CF} login -u ${WERCKER_CF_PUSH_CLOUDFOUNDRY_USER_NAME} -p ${WERCKER_CF_PUSH_CLOUDFOUNDRY_USER_PASS} -o ${WERCKER_CF_PUSH_CLOUDFOUNDRY_ORG} -s ${WERCKER_CF_PUSH_CLOUDFOUNDRY_SPACE}"
 ${CF} login -u ${WERCKER_CF_PUSH_CLOUDFOUNDRY_USER_NAME} -p ${WERCKER_CF_PUSH_CLOUDFOUNDRY_USER_PASS} -o ${WERCKER_CF_PUSH_CLOUDFOUNDRY_ORG} -s ${WERCKER_CF_PUSH_CLOUDFOUNDRY_SPACE}
 PUSH_CMD=""
 
@@ -99,11 +100,9 @@ if [ ! -z ${WERCKER_CF_PUSH_CLOUDFOUNDRY_NO_START} ]; then
   fi
 fi
 
-echo $PUSH_CMD
+echo "$PUSH_CMD"
 
-
-set +e
-push_output=$($PUSH_CMD)
+$PUSH_CMD
 
 if [[ $? -ne 0 ]];then
     warning $push_output
@@ -113,4 +112,3 @@ else
     success 'finished pushing to cloudfoundry';
 
 fi
-set -e
