@@ -100,7 +100,7 @@ fi
 
 echo "$PUSH_CMD"
 
-$PUSH_CMD
+sudo $PUSH_CMD
 
 if [[ $? -ne 0 ]];then
     warning $push_output
